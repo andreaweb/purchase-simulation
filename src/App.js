@@ -5,6 +5,7 @@ class App extends Component {
   state = {
     product: '',
     checkout: '',
+    selectedCoupon: 'none',
     selectedDiscount: 0
   }
   componentDidMount(){
@@ -33,7 +34,12 @@ class App extends Component {
     //   console.log(content);
     // })();
   }
+  couponSelect(id, discount = 0){
+    if(id !== this.state.selectedCoupon){
+      this.setState({selectedCoupon: id, selectedDiscount: discount})
+    }
 
+  }
   render() {
     return (
       <div className="App">
@@ -48,16 +54,28 @@ class App extends Component {
               <h5>cupons</h5>
 
               <div className="coupon-item">
-                <input type="radio" />
-                <label>não usar cupom</label>
+                <input 
+                  id="none" 
+                  name="cupom" 
+                  onChange={() => this.couponSelect("none")} 
+                  checked={this.state.selectedCoupon === "none"} 
+                  type="radio"
+                />
+                <label htmlFor="none">não usar cupom</label>
               </div>
 
               { this.state.checkout.availableCoupons 
-                ? this.state.checkout.availableCoupons.map((coupon, key) =>
-                  <div className="coupon-item">
-                    <input type="radio" />
-                    <label>
-                      black friday 
+                ? this.state.checkout.availableCoupons.map((coupon) =>
+                  <div className="coupon-item" key={coupon.id}>
+                    <input 
+                      type="radio" 
+                      onChange={() => this.couponSelect(coupon.id, coupon.discount)} 
+                      checked={this.state.selectedCoupon === coupon.id} 
+                      name="cupom" 
+                      id={coupon.id} 
+                    />
+                    <label htmlFor={coupon.id}>
+                      {coupon.title} 
                       <span>- R$ {coupon.discount},00</span>
                     </label>
                   </div>
