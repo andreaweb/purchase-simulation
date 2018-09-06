@@ -2,6 +2,7 @@
   --red: #f77274;
   --dark-red: #d26769;
   --dark-gray: #5b5855;
+  --light-gray: #f4f2f0;
 }
 .App {
   font-family: 'Montserrat', sans-serif;
@@ -12,7 +13,7 @@
   height: 61px;
   padding: 17px;
   box-sizing: border-box;
-  border-bottom: 1px solid #f4f2f0;
+  border-bottom: 1px solid var(--light-gray);
   color: white;
   margin-bottom: 30px;
 }
@@ -28,6 +29,7 @@
   display: block;
   margin: 0 auto 39px;
 }
+
 .checkout{
   font-size: 14px;
   margin: 0 20px;
@@ -44,9 +46,29 @@
 .coupon__item:last-child{
   margin-bottom: 37px;
 }
-.coupon__label{
-  display: flex;
-  justify-content: space-between;
+.radio {
+  position: absolute;
+  visibility: hidden
+}
+.coupon__label::before {
+  display: inline-block;
+  content: "";
+  height: 17px;
+  width: 17px;
+  border: 2px solid var(--light-gray);
+  border-radius: 50%;
+}
+.radio:checked + .coupon__label::before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  height: 13px;
+  width: 13px;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 2px var(--light-gray);
+  border-radius: 50%;
+  background: var(--red);
 }
 .summary__item{
   display: flex;

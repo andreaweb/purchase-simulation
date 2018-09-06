@@ -62,25 +62,27 @@ class App extends Component {
                 <input 
                   id="none" 
                   name="cupom" 
+                  className="radio"
                   onChange={() => this.couponSelect("none")} 
                   checked={this.state.selectedCoupon === "none"} 
                   type="radio"
                 />
-                <label htmlFor="none">não usar cupom</label>
+                <label className="coupon__label" htmlFor="none">não usar cupom</label>
               </div>
 
               { this.state.checkout.availableCoupons 
                 ? this.state.checkout.availableCoupons.map((coupon) =>
                   <div className="coupon__item" key={coupon.id}>
+                    <input 
+                      type="radio"
+                      className="radio" 
+                      onChange={() => this.couponSelect(coupon.id, coupon.discount)} 
+                      checked={this.state.selectedCoupon === coupon.id} 
+                      name="cupom" 
+                      id={coupon.id} 
+                    />
                     <label htmlFor={coupon.id} className="coupon__label">
                       <span>
-                        <input 
-                          type="radio" 
-                          onChange={() => this.couponSelect(coupon.id, coupon.discount)} 
-                          checked={this.state.selectedCoupon === coupon.id} 
-                          name="cupom" 
-                          id={coupon.id} 
-                        />
                         {coupon.title} 
                       </span>
                       <span className="red">- R$ {coupon.discount},00</span>
@@ -111,8 +113,8 @@ class App extends Component {
               </p>
             </div>
             <div className="buttons">
-              <button>cancelar</button>
-              <button onClick={this.sendPurchase}>confirmar</button>
+              <button className="buttons button--cancel">cancelar</button>
+              <button  className="button button--confirm" onClick={this.sendPurchase}>confirmar</button>
             </div>
           </div>
         </div>
