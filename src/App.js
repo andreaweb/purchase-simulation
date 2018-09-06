@@ -12,33 +12,38 @@ class App extends Component {
     //GET
     fetch(`${process.env.REACT_APP_API_URL}/api/checkouts/1321`)
     .then(
-      //(res) => { console.log(res); return res.json}
       (res) => {
         return res.json()
       }
     )
     .then((data) => this.setState({product: data.product, checkout: data.checkout}))
     .catch((error) => console.log(error))
-
-    //POST
-    // (async () => {
-    //   const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/checkouts/1321`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    //   const content = await rawResponse.status;
-    // 
-    //   console.log(content);
-    // })();
   }
   couponSelect(id, discount = 0){
     if(id !== this.state.selectedCoupon){
-      this.setState({selectedCoupon: id, selectedDiscount: discount})
-    }
 
+      const updateCheckout = {...this.state.checkout};
+      updateCheckout.totalPrice = 
+        this.state.product.price + this.state.checkout.shippingPrice - discount;
+
+      this.setState({selectedCoupon: id, selectedDiscount: discount, checkout: updateCheckout})
+    }
+  }
+  sendPurchase = () => {
+    const data = this.state;
+    (async () => {
+      const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/checkouts/1321`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      const content = await rawResponse;
+    
+      console.log(content);
+    })();
   }
   render() {
     return (
@@ -100,12 +105,16 @@ class App extends Component {
               </p>
               <p>
                 <span>total</span>
-                <span>R$ {this.state.checkout.totalPrice},00</span>
+                <span>R$ {  
+                    this.state.product.price 
+                    + this.state.checkout.shippingPrice
+                    - this.state.selectedDiscount
+                  },00</span>
               </p>
             </div>
             <div className="buttons">
               <button>cancelar</button>
-              <button>confirmar</button>
+              <button onClick={this.sendPurchase}>confirmar</button>
             </div>
           </div>
         </div>
