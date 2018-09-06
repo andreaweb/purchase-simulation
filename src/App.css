@@ -6,6 +6,7 @@
 }
 .App {
   font-family: 'Montserrat', sans-serif;
+  color: var(--dark-gray);
   /* ps width: 781/2 ps height: 1413/ 2 */
 }
 
@@ -50,11 +51,16 @@
   position: absolute;
   visibility: hidden
 }
+.coupon__title{
+  padding-left: 15px;
+}
 .coupon__label::before {
   display: inline-block;
   content: "";
   height: 17px;
   width: 17px;
+  top: 3px;
+  position: relative;
   border: 2px solid var(--light-gray);
   border-radius: 50%;
 }
@@ -83,5 +89,4 @@
 }
 .bold{
   font-weight: 800;
-  color: var(--dark-gray);
 }

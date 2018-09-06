@@ -67,7 +67,9 @@ class App extends Component {
                   checked={this.state.selectedCoupon === "none"} 
                   type="radio"
                 />
-                <label className="coupon__label" htmlFor="none">não usar cupom</label>
+                <label className="coupon__label" htmlFor="none">
+                  <span className="coupon__title">não usar cupom</span>
+                </label>
               </div>
 
               { this.state.checkout.availableCoupons 
@@ -82,7 +84,7 @@ class App extends Component {
                       id={coupon.id} 
                     />
                     <label htmlFor={coupon.id} className="coupon__label">
-                      <span>
+                      <span className="coupon__title">
                         {coupon.title} 
                       </span>
                       <span className="red">- R$ {coupon.discount},00</span>
