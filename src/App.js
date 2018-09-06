@@ -52,13 +52,13 @@ class App extends Component {
          <img src="./images/logo.png" className="logo" alt="logo" />
         </header>
         <div className="selected-product">
-          <img src={this.state.product.image} alt="Product" />
+          <img src={this.state.product.image} className="product-image" alt="Product" />
 
           <div className="checkout">
             <div className="coupons">
-              <h5>cupons</h5>
+              <h5 className="checkout__title">cupons</h5>
 
-              <div className="coupon-item">
+              <div className="coupon__item">
                 <input 
                   id="none" 
                   name="cupom" 
@@ -71,17 +71,19 @@ class App extends Component {
 
               { this.state.checkout.availableCoupons 
                 ? this.state.checkout.availableCoupons.map((coupon) =>
-                  <div className="coupon-item" key={coupon.id}>
-                    <input 
-                      type="radio" 
-                      onChange={() => this.couponSelect(coupon.id, coupon.discount)} 
-                      checked={this.state.selectedCoupon === coupon.id} 
-                      name="cupom" 
-                      id={coupon.id} 
-                    />
-                    <label htmlFor={coupon.id}>
-                      {coupon.title} 
-                      <span>- R$ {coupon.discount},00</span>
+                  <div className="coupon__item" key={coupon.id}>
+                    <label htmlFor={coupon.id} className="coupon__label">
+                      <span>
+                        <input 
+                          type="radio" 
+                          onChange={() => this.couponSelect(coupon.id, coupon.discount)} 
+                          checked={this.state.selectedCoupon === coupon.id} 
+                          name="cupom" 
+                          id={coupon.id} 
+                        />
+                        {coupon.title} 
+                      </span>
+                      <span className="red">- R$ {coupon.discount},00</span>
                     </label>
                   </div>
                   )
@@ -90,26 +92,22 @@ class App extends Component {
               
             </div>
             <div className="summary">
-              <h5>resumo</h5>
-              <p>
+              <h5 className="checkout__title">resumo</h5>
+              <p className="summary__item">
                 <span>valor original</span>
                 <span>R$ {this.state.product.price},00</span>
               </p>
-              <p>
+              <p className="summary__item">
                 <span>cupom</span>
-                <span>-R$ {this.state.selectedDiscount},00</span>
+                <span className="red">-R$ {this.state.selectedDiscount},00</span>
               </p>
-              <p>
+              <p className="summary__item">
                 <span>frete</span>
                 <span>R$ {this.state.checkout.shippingPrice},00</span>
               </p>
-              <p>
+              <p className="summary__item">
                 <span>total</span>
-                <span>R$ {  
-                    this.state.product.price 
-                    + this.state.checkout.shippingPrice
-                    - this.state.selectedDiscount
-                  },00</span>
+                <span className="bold">R$ {  this.state.checkout.totalPrice},00</span>
               </p>
             </div>
             <div className="buttons">

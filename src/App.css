@@ -1,28 +1,65 @@
+:root{
+  --red: #f77274;
+  --dark-red: #d26769;
+  --dark-gray: #5b5855;
+}
 .App {
-  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  /* ps width: 781/2 ps height: 1413/ 2 */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.header {
+  height: 61px;
+  padding: 17px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f4f2f0;
   color: white;
+  margin-bottom: 30px;
+}
+.logo{
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.product-image{
+  max-height: 134px;
+  max-width: 125px;
+  border-radius: 3px;
+  display: block;
+  margin: 0 auto 39px;
+}
+.checkout{
+  font-size: 14px;
+  margin: 0 20px;
+}
+.checkout__title{
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 31.5px;
+  color: var(--dark-gray);
+}
+.coupon__item{
+  margin-bottom: 26px;
+}
+.coupon__item:last-child{
+  margin-bottom: 37px;
+}
+.coupon__label{
+  display: flex;
+  justify-content: space-between;
+}
+.summary__item{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: 35px;
 }
 
-.App-title {
-  font-size: 1.5em;
+/*utilities*/
+.red{
+  color: var(--red);
 }
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.bold{
+  font-weight: 800;
+  color: var(--dark-gray);
 }
