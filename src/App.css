@@ -7,6 +7,7 @@
 .App {
   font-family: 'Montserrat', sans-serif;
   color: var(--dark-gray);
+  margin-bottom: 10px;
   /* ps width: 781/2 ps height: 1413/ 2 */
 }
 
@@ -54,6 +55,14 @@
 .coupon__title{
   padding-left: 15px;
 }
+.coupon__label{
+  display: flex;
+  align-items: baseline;
+}
+.coupon__discount{
+  color: var(--red);
+  margin-left: auto
+}
 .coupon__label::before {
   display: inline-block;
   content: "";
@@ -81,6 +90,37 @@
   justify-content: space-between;
   margin-top: 0;
   margin-bottom: 35px;
+}
+
+.buttons{
+  display: flex
+}
+.buttons .button:last-child{
+  margin-left: 15px;
+}
+.button{
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  min-height: 48px;
+  min-width: 127px;
+  font-size: 14px;
+}
+.button--cancel{
+  background: #fff;
+  color: var(--red);
+  border: 2px solid var(--light-gray);
+  border-top: none;
+  border-bottom-width: 4px;
+  flex: 1;
+}
+.button--confirm{
+  background: var(--red);
+  color: #fff;
+  border: 1px solid var(--dark-red);
+  border-top: none;
+  border-bottom-width: 4px;
+  flex: 1;
 }
 
 /*utilities*/

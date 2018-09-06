@@ -87,7 +87,7 @@ class App extends Component {
                       <span className="coupon__title">
                         {coupon.title} 
                       </span>
-                      <span className="red">- R$ {coupon.discount},00</span>
+                      <span className="coupon__discount">- R$ {coupon.discount},00</span>
                     </label>
                   </div>
                   )
@@ -115,7 +115,7 @@ class App extends Component {
               </p>
             </div>
             <div className="buttons">
-              <button className="buttons button--cancel">cancelar</button>
+              <button className="button button--cancel">cancelar</button>
               <button  className="button button--confirm" onClick={this.sendPurchase}>confirmar</button>
             </div>
           </div>
