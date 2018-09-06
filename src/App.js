@@ -51,6 +51,7 @@ class App extends Component {
         <header className="header">
          <img src="./images/logo.png" className="logo" alt="logo" />
         </header>
+
         <div className="selected-product">
           <img src={this.state.product.image} className="product-image" alt="Product" />
 
@@ -119,6 +120,14 @@ class App extends Component {
               <button  className="button button--confirm" onClick={this.sendPurchase}>confirmar</button>
             </div>
           </div>
+        </div>
+
+        <div className="modal">
+          <section className="modal__content">
+            <img src="./images/cart.png" className="modal__image" />
+            <h4 className="modal__title">compra confirmada</h4>
+            <p className="modal__description">enviaremos atualizações sobre o pedido para o seu email</p>
+          </section>
         </div>
       </div>
     );
