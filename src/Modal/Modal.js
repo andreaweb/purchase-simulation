@@ -7,6 +7,7 @@ class Modal extends Component{
 			<div 
 	          className={ this.props.open ? "modal" : "display-none"} 
 	          modaltype={ this.props.type }
+	          onClick={ this.props.close }
 	        >
 	          <section className="modal__content">
 	            <img 
@@ -14,6 +15,7 @@ class Modal extends Component{
 	                    ? "./images/cart.png" 
 	                    : "./images/orange-cart.png"
 	                  }
+	              alt=""
 	              className="modal__image" 
 	            />
 	            <h4 className="modal__title">

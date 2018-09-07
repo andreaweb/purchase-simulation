@@ -31,7 +31,11 @@ class App extends Component {
       updateCheckout.totalPrice = 
         this.state.product.price + this.state.checkout.shippingPrice - discount;
 
-      this.setState({selectedCoupon: id, selectedDiscount: discount, checkout: updateCheckout})
+      this.setState({
+          selectedCoupon: id, 
+          selectedDiscount: discount, 
+          checkout: updateCheckout
+        })
     }
   }
   cancelPurchase = () => {
@@ -48,10 +52,9 @@ class App extends Component {
         },
         body: JSON.stringify(checkout)
       })
-      const content = await rawResponse;
-      console.log(rawResponse.ok)
+      const status = await rawResponse.ok;
       
-      if(rawResponse.ok){
+      if(status){
         this.openModal("confirm")
       }else{
         this.openModal("error")
@@ -61,6 +64,9 @@ class App extends Component {
   }
   openModal = (modalType) => {
     this.setState({isModalOpen: true, modalType: modalType})
+  }
+  closeModal = () => {
+     this.setState({isModalOpen: false, modalType: null})
   }
   render() {
     return (
@@ -77,7 +83,11 @@ class App extends Component {
           sendPurchase={this.sendPurchase}
         />
 
-        <Modal open={this.state.isModalOpen} type={this.state.modalType} />
+        <Modal 
+          open={this.state.isModalOpen} 
+          close={this.closeModal} 
+          type={this.state.modalType} 
+        />
       </div>
     );
   }
