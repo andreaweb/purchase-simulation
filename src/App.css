@@ -133,7 +133,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  display: none;
 }
 .modal__content{
   min-width: 295px;
@@ -161,4 +160,7 @@
 }
 .bold{
   font-weight: 800;
+}
+.display-none{
+  display: none
 }

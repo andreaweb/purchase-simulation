@@ -7,7 +7,8 @@ class App extends Component {
     checkout: '',
     selectedCoupon: 'none',
     selectedDiscount: 0,
-    isModalOpen: false
+    isModalOpen: false,
+    modalType: null
   }
   componentDidMount(){
     //GET
@@ -30,8 +31,8 @@ class App extends Component {
       this.setState({selectedCoupon: id, selectedDiscount: discount, checkout: updateCheckout})
     }
   }
-  cancelPurchase(){
-
+  cancelPurchase = () => {
+    this.openModal("cancel")
   }
   sendPurchase = () => {
     const checkout = this.state.checkout;
@@ -45,17 +46,22 @@ class App extends Component {
         body: JSON.stringify(checkout)
       })
       const content = await rawResponse;
-      console.log(rawResponse)
-    
+      console.log(rawResponse.ok)
+      
+      if(rawResponse.ok){
+        this.openModal("confirm")
+      }else{
+        this.openModal("error")
+      }
       //console.log("Sent to server:",JSON.stringify(checkout));
     })();
   }
-  openModal = () => {
-    this.setState({isModalOpen: true})
+  openModal = (modalType) => {
+    this.setState({isModalOpen: true, modalType: modalType})
   }
   render() {
     return (
-      <div className="App">
+      <div className={ this.state.isModalOpen ? "App App--modal-open" : "App" }>
         <header className="header">
          <img src="./images/logo.png" className="logo" alt="logo" />
         </header>
@@ -130,11 +136,24 @@ class App extends Component {
           </div>
         </div>
 
-        <div className={"modal"}>
+        <div 
+          className={ this.state.isModalOpen ? "modal" : "display-none"} 
+          modaltype={ this.state.modalType }
+        >
           <section className="modal__content">
-            <img src="./images/cart.png" className="modal__image" />
-            <h4 className="modal__title">compra confirmada</h4>
-            <p className="modal__description">enviaremos atualizações sobre o pedido para o seu email</p>
+            <img 
+              src={ this.state.modalType == "confirm" 
+                    ? "./images/cart.png" 
+                    : "./images/orange-cart.png"
+                  }
+              className="modal__image" 
+            />
+            <h4 className="modal__title">
+              compra confirmada
+            </h4>
+            <p className="modal__description">
+              enviaremos atualizações sobre o pedido para o seu email
+            </p>
           </section>
         </div>
       </div>
