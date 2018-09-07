@@ -6,7 +6,8 @@ class App extends Component {
     product: '',
     checkout: '',
     selectedCoupon: 'none',
-    selectedDiscount: 0
+    selectedDiscount: 0,
+    isModalOpen: false
   }
   componentDidMount(){
     //GET
@@ -29,8 +30,11 @@ class App extends Component {
       this.setState({selectedCoupon: id, selectedDiscount: discount, checkout: updateCheckout})
     }
   }
+  cancelPurchase(){
+
+  }
   sendPurchase = () => {
-    const data = this.state;
+    const checkout = this.state.checkout;
     (async () => {
       const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/checkouts/1321`, {
         method: 'POST',
@@ -38,12 +42,16 @@ class App extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(checkout)
       })
       const content = await rawResponse;
+      console.log(rawResponse)
     
-      console.log(content);
+      //console.log("Sent to server:",JSON.stringify(checkout));
     })();
+  }
+  openModal = () => {
+    this.setState({isModalOpen: true})
   }
   render() {
     return (
@@ -116,13 +124,13 @@ class App extends Component {
               </p>
             </div>
             <div className="buttons">
-              <button className="button button--cancel">cancelar</button>
+              <button className="button button--cancel" onClick={this.cancelPurchase}>cancelar</button>
               <button  className="button button--confirm" onClick={this.sendPurchase}>confirmar</button>
             </div>
           </div>
         </div>
 
-        <div className="modal">
+        <div className={"modal"}>
           <section className="modal__content">
             <img src="./images/cart.png" className="modal__image" />
             <h4 className="modal__title">compra confirmada</h4>
